@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect, createContext } from 'react'
+
+import './App.css'
+import Pages from './pages/Pages'
+
+export const mainMoviesContext = createContext({})
+export const searchContext = createContext({})
 
 function App() {
+  const [mainMovies, setMainMovies] = useState('2021')
+  const [search, setSearch] = useState('')
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <mainMoviesContext.Provider value={{ mainMovies, setMainMovies }}>
+        <searchContext.Provider value={{ search, setSearch }}>
+          <Pages />
+        </searchContext.Provider>
+      </mainMoviesContext.Provider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
